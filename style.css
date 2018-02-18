@@ -11,5 +11,23 @@
     color: red;
 }
 #aboutUs{
-    background-color: aqua;
+    background-color: aqua; 
+}
+#div1,#div2,#div3,#div4{
+    height: 200px;
+    width: 25%;
+    display: inline;
+    float: left;
+}
+#div1{
+    background-color: #33cc33;
+}
+#div2{
+    background-color: #ffff00;
+}
+#div3{
+    background-color: #ff9933;
+}
+#div4{
+    background-color: #1a75ff;
 }
