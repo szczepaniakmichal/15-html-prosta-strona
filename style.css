@@ -15,7 +15,7 @@
 }
 #div1,#div2,#div3,#div4{
     height: 200px;
-    width: 25%;
+    width: 200px;
     display: inline;
     float: left;
 }
