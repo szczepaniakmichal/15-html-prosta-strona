@@ -1,12 +1,15 @@
-#aboutUs{
+#aboutUsLink{
     color: aqua;
 }
-#skills{
+#skillsLink{
     color: green
 }
-#portfolio{
+#portfolioLink{
     color: gold;
 }
-#contact{
+#contactLink{
     color: red;
+}
+#aboutUs{
+    background-color: aqua;
 }
