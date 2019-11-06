@@ -1,3 +1,86 @@
+.row {
+    margin: 5%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: auto;
+    min-width: 800px;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 20px;
+    border: 1px solid #000;
+    text-align: center;
+    border-right: 1px solid #000;
+    border-bottom: 3px solid #000;
+    border-right-color: transparent;
+}
+
+
+
+bgc
+h10px
+df
+d
+m5%
+pb5px
+w:a
+miw
+
+font
+ff:a
+fz
+
+bxz
+
+border
+bd+
+bdr+
+bdrc:t
+
+
+text
+ta:c
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .main {
     display: block;
     position: relative;
