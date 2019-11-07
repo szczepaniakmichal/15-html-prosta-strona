@@ -12,16 +12,25 @@
     border-right: 1px solid #000;
     border-bottom: 3px solid #000;
     border-right-color: transparent;
+    -webkit-border-radius: 5%;
+    -moz-border-radius: 5%;
+    border-radius: 5%;
+    padding-bottom: 5px;
 }
 
 
+w100
+w100p
+w100e
+
+w100+h50+m20+p5
 
 bgc
 h10px
 df
 d
 m5%
-pb5px
+pb5
 w:a
 miw
 
@@ -39,6 +48,9 @@ bdrc:t
 
 text
 ta:c
+
+border
+bdrs
 
 
 
