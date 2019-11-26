@@ -1,6 +1,6 @@
 div {
   width: 100px;
-  height: 200px;
+  height: 100px;
   background-color: red;
 }
 
@@ -16,12 +16,21 @@ div {
 /*  }*/
 /*}*/
 
-@media handheld, (min-aspect-ratio: 4/3) {
-
+@media handheld, (min-aspect-ratio: 2/1) {
     div {
-      background-color: yellow;
+        width: 200px;
+        height: 100px;
     }
 }
+
+@media handheld, (max-aspect-ratio: 1/2) {
+    div {
+        width: 100px;
+        height: 200px;
+    }
+}
+
+
 
 
 /*element.style {*/
