@@ -1,18 +1,31 @@
-.case_study {
-    text-align: center;
+
+div {
+    width: 100px;
+    height: 100px;
 }
 
-.p {
-
+@media (orientation: portrait) {
+    div {
+        width: 100px;
+        height: 200px;
+    }
 }
 
 
-#id {
-    width: 20px;
+@media (orientation: landscape) {
+    div {
+        width: 200px;
+        height: 100px;
+    }
 }
 
-.ooo {
-}
+
+
+
+
+
+
+
 
 
 
