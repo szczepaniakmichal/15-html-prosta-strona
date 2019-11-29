@@ -21,9 +21,25 @@ div {
 
 
 
+/* ======================================================!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! WAZNY KOD !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!======================================================*/
 
 
 
+@media (orientation: portrait) {
+    body > div.kodabots-chat-4gHwe12.open {
+        max-height: 100vh;
+        bottom: 0;
+    }
+
+    body > div.kodabots-chat-4gHwe12.open > div.kodabots-chat-4gHwe12__content {
+        height:100vh;
+        width: 100vw;
+    }
+
+    body > div.kodabots-chat-4gHwe12.open {
+        width: 100vw;
+    }
+}
 
 
 
