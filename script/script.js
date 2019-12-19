@@ -27,7 +27,19 @@ const checkk = () => {
 
 
 
+document.querySelector("#content-dane-fatca-8768550871eca148a120addb7ff2b478 > form > div > div.panel-navigation.align-bottom.text-right > button.btn.btn-submit.btn-dalej").addEventListener("click", function() {console.log("bleeeee"));
 
+function() {
+    alert('I am anonymous');
+}
+
+const zzz = function() {
+    alert('I am anonymous');
+};
+
+zzz()
+
+document.querySelector("#content-dane-fatca-8768550871eca148a120addb7ff2b478 > form > div > div.panel-navigation.align-bottom.text-right > button.btn.btn-submit.btn-dalej").addEventListener("click", zzz);
 
 
 
