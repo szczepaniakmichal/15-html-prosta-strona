@@ -1,27 +1,16 @@
-const str = document.querySelector('p').textContent;
-console.log(str);
+var getCellValue = function(tr, idx){ return tr.children[idx].innerText || tr.children[idx].textContent; }
 
-let count = 0;
-
-for (i = 0; i < str.length; i++) {
-    if (str.charAt(i) === "a") {
-        count++;
-    }
-}
-
-console.log(count);
+var comparer = function(idx, asc) { return function(a, b) { return function(v1, v2) {
+    return v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ? v1 - v2 : v1.toString().localeCompare(v2);
+}(getCellValue(asc ? a : b, idx), getCellValue(asc ? b : a, idx));
+}};
 
 
-// setTimeout(() => {
-//     let head  = document.getElementsByTagName('head')[0];
-//     let link  = document.createElement('link');
-//     // link.id   = cssId;
-//     link.rel  = 'stylesheet';
-//     link.type = 'text/css';
-//     link.href = 'css/style.css';
-//     link.media = 'all';
-//     head.appendChild(link);
-// }, 8000);
-
-
-
+Array.prototype.slice.call(document.querySelectorAll('th')).forEach(function(th) { th.addEventListener('click', function() {
+    var table = th.parentNode
+    while(table.tagName.toUpperCase() != 'TABLE') table = table.parentNode;
+    Array.prototype.slice.call(table.querySelectorAll('tr:nth-child(n+2)'))
+        .sort(comparer(Array.prototype.slice.call(th.parentNode.children).indexOf(th), this.asc = !this.asc))
+        .forEach(function(tr) { table.appendChild(tr) });
+})
+});

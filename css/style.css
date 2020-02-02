@@ -1,3 +1,17 @@
-body {
-    background-color: purple;
+table {
+    margin: 10px auto;
+    display: inline-table;
+    border: 2px solid silver
+}
+
+table tbody tr, table thead tr {
+    border: 2px solid green
+}
+
+table tr th {
+    border: 2px solid #ff4500
+}
+
+table tr td {
+    border: 2px solid #00f
 }
