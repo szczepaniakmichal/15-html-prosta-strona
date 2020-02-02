@@ -1,68 +1,95 @@
-var gulp = require('gulp');
-// Requires the gulp-sass plugin
-var sass = require('gulp-sass');
+const { watch, src, dest, series, parallel } = require('gulp');
+const browserSync = require('browser-sync').create();
+const babel = require('gulp-babel');
+const concat = require('gulp-concat');
+const uglify = require('gulp-uglify');
+const rename = require('gulp-rename');
+const del = require('del');
+const postcss = require('gulp-postcss');
+const sass = require('gulp-sass');
+const autoprefixer = require('autoprefixer');
+const cssnano = require('cssnano');
 
-gulp.task('sass', function(){
-    return gulp.src('sass/style.scss')
-        .pipe(sass()) // Using gulp-sass
-        .pipe(gulp.dest('css/'))
-});
+const config = {
+    app: {
+        js: [
+            './src/scripts/**/*.js',
+        ],
+        scss: './src/style/**/*.scss',
+        fonts: './src/fonts/*',
+        images: './src/images/*.*',
+        html: './src/*.html'
+    },
+    dist: {
+        base: './dist/',
+        fonts: './dist/fonts',
+        images: './dist/images'
+    }
+}
 
+function jsTask(done) {
+    src(config.app.js)
+        .pipe(babel({
+            presets: ['@babel/preset-env']
+        }))
+        .pipe(concat('main.bundle.js'))
+        .pipe(uglify())
+        .pipe(dest(config.dist.base))
+    done();
+}
 
-//node -v  _check version
-//npm -v  _check version and must instal GULP local        !!!
-//npm install --save-dev gulp  _install gulp on project
-// npm init  _generate json file
-//npm install gulp browser-sync --save-dev  _browser sync
-//npm install gulp-sass --save-dev  _compiler sass to css
-// npm install bootstrap@4.0.0-alpha.6
+function cssTask(done) {
+    src(config.app.scss)
+        .pipe(sass({ outputStyle: 'expanded' }))
+        .pipe(rename({ suffix: '.bundle' }))
+        .pipe(postcss([autoprefixer(), cssnano()]))
+        .pipe(dest(config.dist.base))
+    done();
+}
 
-//Transpilation with Babel ES6 to ES5 - codecademy.com
-//npm init (podajemy dane projektu)
-//npm install babel-cli -D
-//npm install babel-preset-env -D
-//touch .babelre
-//npm run build
-//
+function fontTask(done) {
+    src(config.app.fonts)
+        .pipe(dest(config.dist.fonts))
+    done();
+}
 
-//this code checks .html .js .css & convert scss
+function imagesTask(done) {
+    src(config.app.images)
+        .pipe(dest(config.dist.images))
+    done();
+}
 
-// var gulp = require('gulp');
-// var sass = require('gulp-sass');
-// var browserSync = require('browser-sync').create();
-//
-// // process SASS files and return the stream.
-// gulp.task('sass', function(){
-//     return gulp.src('./sass/main.scss')
-//     .pipe(sass())
-//     .pipe(gulp.dest('./css'))
-//     .pipe(browserSync.stream());
-// });
-//
-//
-// // process JS files and return the stream.
-// gulp.task('js', function(){
-//     return gulp.src('./script.js')
-//     .pipe(sass())
-//     .pipe(gulp.dest('./'))
-//     .pipe(browserSync.stream());
-// });
-//
-//
-// //Reload page
-// gulp.task('serve', ['sass'], function(){
-//
-//     browserSync.init({
-//         server: './'
-//     });
-//
-//     gulp.watch('./sass/main.scss', ['sass']);
-//     gulp.watch('./*.html').on('change', browserSync.reload);
-//     gulp.watch('./*.js').on('change', browserSync.reload);
-// });
-//
-// gulp.task('default', ['serve']);
-//
-//
-//
-//
+function templateTask(done) {
+    src(config.app.html)
+        .pipe(dest(config.dist.base))
+    done();
+}
+
+function watchFiles() {
+    watch(config.app.js, series(jsTask, reload));
+    watch(config.app.scss, series(cssTask, reload));
+    watch(config.app.fonts, series(fontTask, reload));
+    watch(config.app.images, series(imagesTask, reload));
+    watch(config.app.html, series(templateTask, reload));
+}
+
+function liveReload(done) {
+    browserSync.init({
+        server: {
+            baseDir: config.dist.base
+        },
+    });
+    done();
+}
+
+function reload (done) {
+    browserSync.reload();
+    done();
+}
+
+function cleanUp() {
+    return del([config.dist.base]);
+}
+
+exports.dev = parallel(jsTask, cssTask, fontTask, imagesTask, templateTask, watchFiles, liveReload);
+exports.build = series(cleanUp, parallel(jsTask, cssTask, fontTask, imagesTask, templateTask));
