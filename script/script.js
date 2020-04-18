@@ -14,3 +14,6 @@ Array.prototype.slice.call(document.querySelectorAll('th')).forEach(function(th)
         .forEach(function(tr) { table.appendChild(tr) });
 })
 });
+
+
+console.log("ddddddddddddddd")
